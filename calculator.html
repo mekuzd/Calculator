@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/calculator.css">
+        <script src="/calculator.js"></script>
+    </head>
+    <style>
+        p {
+            color: red;
+            font-size: 20px;
+            font-weight: 400;
+            margin: 20px;
+        }
+
+        input {
+            pointer-events: none;
+            padding-right: 20px;
+            border: none;
+            font-size: 50px;
+            text-align: right;
+            width: 100%;
+            height: 100px;
+        }
+
+        .mago {
+            background-color: white;
+            border: none;
+            font-size: 50px;
+            text-align: right;
+            width: 100%;
+            height: 100px;
+        }
+
+
+
+        input:focus {
+            outline: none;
+        }
+
+        .top {
+            background-color: rgb(3, 3, 61);
+            padding: 5px;
+            width: 70%;
+            height: 60%;
+            margin: 110px auto;
+            border: 2px solid grey;
+
+        }
+
+        .top2 {
+            width: 30%;
+        }
+
+        button {
+            font-size: 20px;
+            font-weight: bold;
+            background-color: white;
+            border-width: thin;
+            border-radius: 5px;
+            border-color: lightgrey;
+            margin: 10px;
+            height: 80px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .btntop {
+            background-color: green;
+        }
+    </style>
+
+    <body>
+        <div class="top">
+            <div class="mago"> <input type="text" id="text1"></div>
+            <br>
+            <div class=" top2 d-flex justify-content-between">
+                <p>MC</p>
+                <p>MR</p>
+                <p>M+</p>
+                <p>M-</p>
+                <p>MS</p>
+                <button id="button" class="btntop" onclick="button()">on</button>
+            </div>
+            <div class="d-flex">
+                <button onclick="num2()">%</button>
+                <button onclick="">CE</button>
+                <button onclick="cancel()">C</button>
+                <button onclick="del()" class=" fs-3  fa fa-long-arrow-left"></button>
+                <button class="fs-3" onclick="num('/')">&divide;</button>
+                <button onclick="root()" class="fs-3">&radic;</button>
+            </div>
+
+            <div class="d-flex">
+                <button onclick="num(1)">1</button>
+                <button onclick="num(2) ">2</button>
+                <button onclick="num(3) ">3</button>
+                <button onclick="num(4) ">4</button>
+                <button onclick="num('-')" class="fs-1">-</button>
+                <button onclick="num3()">1/x</button>
+            </div>
+            <div class="d-flex">
+                <button onclick="num(5) ">5</button>
+                <button onclick="num(6) ">6</button>
+                <button onclick="num(7) ">7</button>
+                <button onclick="num(8) ">8</button>
+                <button onclick="num ('*')" class="fs-3">&times;</button>
+                <button onclick="" class="fs-3">&plusmn;</button>
+            </div>
+            <div class="d-flex">
+                <button onclick="num(9) ">9</button>
+                <button onclick="num('.')">.</button>
+                <button onclick="num(0) ">0</button>
+                <button onclick="solve()" class="bg-success text-white"> = </button>
+                <button onclick="num('+')" class="fs-3">+</button>
+                <button onclick="num1()" class=" fs-3 fa fa-superscript"></button>
+            </div>
+        </div>
+
+
+    </body>
+
+</html>
+<script>
+    let x = document.getElementById("text1")
+
+    function cancel() {
+        x.value = " "
+    }
+
+    function del() {
+        x.value = x.value.slice(0, - 1)
+    }
+
+    function num(number) {
+        x.value += number
+    }
+
+    function num1() {
+        x.value = Math.pow(x.value, 2)
+    }
+
+    function num2() {
+        x.value /= 100
+    }
+
+    function num3() {
+        x.value = 1 / x.value
+    }
+
+    function root() {
+        x.value = Math.sqrt(x.value)
+    }
+
+    function solve() {
+        if (x.value.includes('+')) {
+            let operands = x.value.split('+')
+            x.value = Number(operands[0]) + Number(operands[1]);
+        }
+        else if (x.value.includes('-')) {
+            let operands = x.value.split('-')
+            x.value = Number(operands[0]) - Number(operands[1])
+        }
+
+        else if (x.value.includes('/')) {
+            let operands = expression.split('/')
+            x.value = Number(operands[0]) / Number(operands[1])
+        }
+
+        else if (x.value.includes('*')) {
+            let operands = x.value.split('*')
+            x.value = Number(operands[0]) * Number(operands[1])
+        }
+
+    }
+
+
+    let btn = document.getElementById('button')
+    let change = true
+    document.getElementById('first')
+
+    function button() {
+        if (change == true) {
+            btn.innerText = 'on'
+            btn.style.backgroundColor = ' green'
+            document.getElementById('text1').value = ''
+            document.getElementById('text1').style.display = 'block'
+            change = false
+        }
+
+        else if (change == false) {
+
+
+            btn.innerText = 'off'
+            btn.style.backgroundColor = 'white'
+            document.getElementById('text1').value = ''
+            document.getElementById('text1').style.display = 'none'
+            change = true
+        }
+    }
+</script>
